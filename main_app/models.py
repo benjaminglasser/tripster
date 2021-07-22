@@ -4,6 +4,7 @@ from django.urls import reverse
 
 # Create your models here.
 
+
 class Trip(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField()
@@ -14,3 +15,11 @@ class Trip(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'trip_id': self.id})
+
+
+class Stop(models.Model):
+    stop_name = models.CharField(max_length=100)
+    stop_adress = models.CharField(max_length=100)
+    stop_city = models.CharField(max_length=100)
+    stop_state = models.CharField(max_length=100)
+    stop_date = models.DateField()
