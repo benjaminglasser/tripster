@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>Tripster</title>
 </head>
 <body>
@@ -16,12 +17,18 @@
             <div class="nav-wrapper">
                 <ul>
                     <li>
-                        <a href="/" class="left brand-logo">Tripster</a>
+                        <a href="{% url 'home' %}" class="left brand-logo">Tripster</a>
                     </li>
                 </ul>
                 <ul class="right">
                     <li>
-                        <a href="/about">About</a>
+                        <a href="{% url 'about' %}">About</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'index' %}">View All Trips</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'trips_create' %}">Create a Trip</a>
                     </li>
                     <li>
                         <a href="/logout">Logout</a>
