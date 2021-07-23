@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content%}
-<h1 class="details-header">{{ trip.name }}</h1>
+<h1 class="centered">{{ trip.name }}</h1>
 <div class="row">
     <div class="col s6">
         <h4>Your Trip Details</h4>
@@ -9,7 +9,7 @@
         <div class="card">
             <a href="/trips/{{trip.id}}">
                 <div class="card-content">
-                    <p>Starting at: {{trip.start_location}} on {{trip.start_date}}</p>
+                    <p>Starting at: <span class="bold">{{trip.start_location}}</span> on <span class="bold">{{trip.start_date}}</span></p>
                 </div>
             </a>
         </div>
@@ -31,7 +31,7 @@
         <div class="card">
             <a href="/trips/{{trip.id}}">
                 <div class="card-content">
-                    <p>Ending at: {{trip.end_location}} on {{trip.end_date}}</p>
+                    <p>Ending at: <span class="bold">{{trip.end_location}}</span> on <span class="bold">{{trip.end_date}}</span></p>
                 </div>
             </a>
         </div>
@@ -40,7 +40,7 @@
 
         <div class="card-action">
             <a class='btn' href="{% url 'trips_update' trip.id %}">Edit</a>
-            <a class='btn' href="{% url 'trips_delete' trip.id %}">Delete</a>
+            <a class='btn red' href="{% url 'trips_delete' trip.id %}">Delete</a>
         </div>
     </div>
 
