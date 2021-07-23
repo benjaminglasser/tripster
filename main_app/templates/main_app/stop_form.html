@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input class="btn" type="submit" value="Submit">
+</form>
+<script>
+  
+    const stopDateEl = document.getElementById('id_stop_date');
+
+    M.Datepicker.init(stopDateEl, {
+        format: 'yyyy-mm-dd',
+        default: new Date(),
+        setDefault: true,
+        autoClose: true,
+    });
+
+</script>
+
+{% endblock %}

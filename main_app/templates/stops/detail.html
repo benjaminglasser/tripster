@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="centered">
+    <h1>{{stop.stop_name}} Details</h1>
+    <h3>{{stop.stop_adress}}</h3>
+    <h3>{{stop.stop_city}}, {{stop.stop_state}}</h3>
+    <h3>on {{stop.stop_date}}</h3>
+</div>
+
+<div class="card-action">
+    <a class='btn' href="{% url 'stop_update' stop.id %}">Edit</a>
+    <a class='btn red' href="{% url 'stop_delete' stop.id %}">Delete</a>
+</div>
+
+{% endblock %}
