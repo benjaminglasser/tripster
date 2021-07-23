@@ -68,12 +68,10 @@ def stop_create(request, trip_id):
     return redirect('detail', trip_id=trip_id)
 
 
-def stop_detail(request, trip_id, stop_id):
+def stop_detail(request, stop_id):
     stop = Stop.objects.get(id=stop_id)
-    trip = Trip.objects.get(id=trip_id)
 
     return render(request, 'stops/detail.html', {
-        'trip': trip,
         'stop': stop,
     })
 
@@ -82,7 +80,6 @@ class StopUpdate(UpdateView):
     model = Stop
     fields = ['stop_name', 'stop_adress',
               'stop_city', 'stop_state', 'stop_date']
-    success_url = '/trips/'
 
 
 class StopDelete(DeleteView):

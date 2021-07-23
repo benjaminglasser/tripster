@@ -18,7 +18,7 @@
 
         {% for s in stops %}
         <div class="card">
-            <a href='/trips/{{trip.id}}/stops/{{s.id}}'>
+            <a href="{% url 'stop_detail' s.id %}">
                 <div class="card-content">
                     <p><span class="bold">{{s.stop_name}}</span> on <span class="bold">{{s.stop_date}}</span></p>
                 </div>
