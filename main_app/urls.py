@@ -10,6 +10,11 @@ urlpatterns = [
     path('trips/create/', views.TripCreate.as_view(), name="trips_create"),
     path('trips/<int:pk>/update', views.TripUpdate.as_view(), name='trips_update'),
     path('trips/<int:pk>/delete', views.TripDelete.as_view(), name='trips_delete'),
+    # stops:
+    path('trips/<int:trip_id>/stop_create/',
+         views.stop_create, name="stop_create"),
+
+
     # auth:
     # path('accounts/signup/', views.signup, name='signup'),
 ]
