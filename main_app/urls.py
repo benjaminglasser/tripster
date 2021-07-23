@@ -13,6 +13,8 @@ urlpatterns = [
     # stops:
     path('trips/<int:trip_id>/stop_create/',
          views.stop_create, name="stop_create"),
+    path('trips/<int:trip_id>/stops/<int:stop_id>',
+         views.stop_detail, name="stop_detail")
 
 
     # auth:

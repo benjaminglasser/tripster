@@ -18,9 +18,11 @@
 
         {% for s in stops %}
         <div class="card">
-            <div class="card-content">
-                <p>{{s.stop_name}}</p>
-            </div>
+            <a href='/trips/{{trip.id}}/stops/{{s.id}}'>
+                <div class="card-content">
+                    <p><span class="bold">{{s.stop_name}}</span> on <span class="bold">{{s.stop_date}}</span></p>
+                </div>
+            </a>
         </div>
         {% endfor %}
 

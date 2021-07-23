@@ -15,5 +15,9 @@ footer.page-footer {
 }
 
 .details-header {
-  text-align: right;
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
 }

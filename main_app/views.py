@@ -68,6 +68,12 @@ def stop_create(request, trip_id):
     return redirect('detail', trip_id=trip_id)
 
 
+def stop_detail(request, trip_id, stop_id):
+    stop = Stop.objects.get(id=stop_id)
+    return render(request, 'stops/detail.html', {
+        'stop': stop
+    })
+
 # auth:
 
 
