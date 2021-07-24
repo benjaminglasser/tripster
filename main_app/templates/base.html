@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Chivo:300,700|Playfair+Display:700i" rel="stylesheet">
     <title>Tripster</title>
 </head>
 <body>
     <header class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper blue">
+        <nav class="transparent z-depth-0">
+            <div class="nav-wrapper">
                 <ul>
                     <li>
-                        <a href="{% url 'home' %}" class="left brand-logo">Tripster</a>
+                            <a href="{% url 'home' %}" class="left brand-logo">Tripster</a>   
                     </li>
                 </ul>
                 <ul class="right">
@@ -50,7 +51,7 @@
         {% block content%}
         {% endblock %}
     </main>
-    <footer class="page-footer blue">
+    <footer class="page-footer transparent z-depth-0">
         <div class="right"> All Rights Reserved, &copy; 2021 Tripster</div>
     </footer>
 </body>
