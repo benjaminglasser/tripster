@@ -70,3 +70,51 @@ footer.page-footer {
   left: 0;
   right: 0;
 }
+.about-page-img {
+  background-image: url("../imgs/travel4.jpeg");
+  opacity: 0.5;
+  z-index: -1;
+  display: block;
+  position: absolute;
+  height: 100vh;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.trips-page-img {
+  background-image: url("../imgs/travel9.jpeg");
+  opacity: 0.5;
+  z-index: -1;
+  display: block;
+  position: absolute;
+  height: 100vh;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.create-trips-page-img {
+  background-image: url("../imgs/travel8.jpeg");
+  opacity: 0.2;
+  z-index: -1;
+  display: block;
+  position: absolute;
+  height: 100vh;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.stops-page-img {
+  background-image: url("../imgs/travel11.jpeg");
+  opacity: 0.4;
+  z-index: -1;
+  display: block;
+  position: absolute;
+  height: 100vh;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+}
