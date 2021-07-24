@@ -2,7 +2,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: blue;
+  background-image: url("../imgs/travel2.jpeg");
 }
 
 main {
