@@ -2,16 +2,38 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-image: url("../imgs/travel2.jpeg");
+  color: white;
+  background-color: rgb(36, 40, 55);
+  font-family: "Chivo", sans-serif;
+  font-weight: 300;
+}
+
+h1,
+h2 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-style: italic;
 }
 
 main {
   flex: 1 0 auto;
 }
 
+.brand-logo {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-style: italic;
+  margin-left: 20px;
+}
+
 footer.page-footer {
-  padding-top: 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  margin-top: 20px;
 }
 
 .details-header {
@@ -24,4 +46,27 @@ footer.page-footer {
 
 .centered {
   text-align: center;
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+/* background images */
+
+.home-page-img {
+  background-image: url("../imgs/travel3.jpeg");
+  opacity: 0.5;
+  z-index: -1;
+  display: block;
+  position: absolute;
+  height: 100vh;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
 }

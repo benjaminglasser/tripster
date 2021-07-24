@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Welcome to Tripster</h1>
-    <h5>The best place to help you get away</h5>
-    <a class="btn" href="{% url 'trips_create' %}">Create Trip</a>
+    <div class="home-page">
+        <h1>Welcome to Tripster</h1>
+        <h5>The best place to help you get away</h5>
+        <a class="btn" href="{% url 'trips_create' %}">Create Trip</a>
+    </div>
+
+    <div class="home-page-img" />
+
 {% endblock %}
