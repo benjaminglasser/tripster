@@ -6,6 +6,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Trip, Stop
 from .forms import StopForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def home(request):
@@ -17,7 +19,7 @@ def about(request):
 
 # trips:
 
-
+@login_required
 def trips_index(request):
     trips = Trip.objects.all()
     return render(request, 'trips/index.html', {'trips': trips})
@@ -35,24 +37,24 @@ def trips_detail(request, trip_id):
     })
 
 
-class TripCreate(CreateView):
+class TripCreate(LoginRequiredMixin, CreateView):
     model = Trip
     fields = ['name', 'start_date', 'end_date',
               'start_location', 'end_location']
+    
 
     def form_valid(self, form):
-
         form.instance.user = self.request.user
         return super().form_valid(form)
 
 
-class TripUpdate(UpdateView):
+class TripUpdate(LoginRequiredMixin, UpdateView):
     model = Trip
     fields = ['name', 'start_date', 'end_date',
               'start_location', 'end_location']
 
 
-class TripDelete(DeleteView):
+class TripDelete(LoginRequiredMixin, DeleteView):
     model = Trip
     success_url = '/trips/'
 
@@ -76,22 +78,32 @@ def stop_detail(request, stop_id):
     })
 
 
-class StopUpdate(UpdateView):
+class StopUpdate(LoginRequiredMixin, UpdateView):
     model = Stop
     fields = ['stop_name', 'stop_adress',
               'stop_city', 'stop_state', 'stop_date']
 
 
-class StopDelete(DeleteView):
+class StopDelete(LoginRequiredMixin, DeleteView):
     model = Stop
     success_url = '/trips/'
 
+
 # auth:
-
-
-def login(request):
-    return render(request, 'login.html')
-
 
 def logout(request):
     return render(request, 'logout.html')
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid Signup - Please Try Again'
+
+    form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form, 'error_message': error_message})

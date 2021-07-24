@@ -16,7 +16,7 @@
 
         <!-- STOP CARDS -->
 
-        {% for s in stops %}
+        {% for s in trip.stop_set.all %}
         <div class="card">
             <a href="{% url 'stop_detail' s.id %}">
                 <div class="card-content">

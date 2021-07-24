@@ -23,6 +23,7 @@ class Stop(models.Model):
     stop_city = models.CharField(max_length=100)
     stop_state = models.CharField(max_length=100)
     stop_date = models.DateField()
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('stop_detail', kwargs={'stop_id': self.id})

@@ -19,6 +19,8 @@ urlpatterns = [
          views.StopUpdate.as_view(), name='stop_update'),
     path('stops/<int:pk>/delete',
          views.StopDelete.as_view(), name='stop_delete'),
+    path('accounts/signup/',
+         views.signup, name='signup'),
 
 
 
