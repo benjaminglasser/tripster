@@ -4,10 +4,16 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Trip, Stop
+from .models import Trip, Stop, Photo
 from .forms import StopForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import boto3
+import uuid
+
+#Constants:
+S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
+BUCKET = 'tripster-fg'
 
 
 def home(request):
@@ -24,7 +30,7 @@ def trips_index(request):
     trips = Trip.objects.all()
     return render(request, 'trips/index.html', {'trips': trips})
 
-
+@login_required
 def trips_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
     stop_form = StopForm()
@@ -60,7 +66,7 @@ class TripDelete(LoginRequiredMixin, DeleteView):
 
 # stops:
 
-
+@login_required
 def stop_create(request, trip_id):
     form = StopForm(request.POST)
     if form.is_valid():
@@ -69,7 +75,7 @@ def stop_create(request, trip_id):
         new_stop.save()
     return redirect('detail', trip_id=trip_id)
 
-
+@login_required
 def stop_detail(request, stop_id):
     stop = Stop.objects.get(id=stop_id)
 
@@ -107,3 +113,20 @@ def signup(request):
 
     form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form, 'error_message': error_message})
+
+#Photo:
+@login_required
+def add_photo(request, stop_id):
+    photo_file= request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Photo(url=url, stop_id=stop_id)
+            photo.save()
+        except Exception as error:
+            print('An error occured uploading file to S3')
+            print(error)
+    return redirect('stop_detail', stop_id=stop_id)
