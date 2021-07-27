@@ -27,3 +27,10 @@ class Stop(models.Model):
 
     def get_absolute_url(self):
         return reverse('stop_detail', kwargs={'stop_id': self.id})
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    stop = models.ForeignKey(Stop, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for stop_id: {self.stop_id} @{self.url}"
