@@ -8,8 +8,7 @@ from .models import Trip, Stop, Photo
 from .forms import StopForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-import boto3
-import uuid
+
 
 #Constants:
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
