@@ -56,6 +56,31 @@ footer.page-footer {
   height: 80vh;
 }
 
+/* Index Page: */
+.card {
+  background-color: lightgrey;
+  background: rgba(204, 204, 204, 0.5);
+}
+
+.card-content {
+  color: white;
+}
+
+/* Stop Detail Page: */
+.card-panel {
+  background-color: lightgrey;
+  background: rgba(204, 204, 204, 0.5);
+}
+
+th, td {
+  background-color: lightgrey;
+  background: rgba(204, 204, 204, 0.5);
+}
+
+label, input {
+  color: white;
+}
+
 /* background images */
 
 .home-page-img {
