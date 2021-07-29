@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content%}
-<h1 class="centered">{{ trip.name }}</h1>
+<h1 class="centered">{{ trip.start_location }}</h1>
 <div class="row">
     <div class="col s6">
         <h4>Your Trip Details</h4>
@@ -9,7 +9,8 @@
         <div class="card">
             <a href="/trips/{{trip.id}}">
                 <div class="card-content">
-                    <p>Starting at: <span class="bold">{{trip.start_location}}</span> on <span class="bold">{{trip.start_date}}</span></p>
+                    <p>Starting at: <span class="bold">{{trip.start_location}}</span> on <span
+                            class="bold">{{trip.start_date}}</span></p>
                 </div>
             </a>
         </div>
@@ -31,7 +32,8 @@
         <div class="card">
             <a href="/trips/{{trip.id}}">
                 <div class="card-content">
-                    <p>Ending at: <span class="bold">{{trip.end_location}}</span> on <span class="bold">{{trip.end_date}}</span></p>
+                    <p>Ending at: <span class="bold">{{trip.end_location}}</span> on <span
+                            class="bold">{{trip.end_date}}</span></p>
                 </div>
             </a>
         </div>
@@ -59,6 +61,11 @@
         </form>
     </div>
 </div>
+<!-- <p id="startCoordinate">{{ startCoordinates.features.0.center}}</p> -->
+<!-- MAP -->
+<hr />
+
+<div id='map' style='width: 69vw; height: 40vh;'></div>
 
 <div class="trips-page-img" />
 <!-- datepicker script -->
@@ -71,6 +78,31 @@
         setDefault: true,
         autoClose: true,
     });
+
+    mapboxgl.accessToken =
+        'pk.eyJ1IjoiYmVuZ2xhc3NlciIsImEiOiJja3JvOWJkeG8yODNtMndwZXB5cGYwYTZiIn0.t5K6aF-sboGpQD_xI_tU4w';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-100.03, 38.91],
+        zoom: 2
+    });
+
+    var marker = new mapboxgl.Marker() 
+        .setLngLat([-100.03, 38.91]) 
+        .addTo(map); 
+
+    var geocoder = new MapboxGeocoder({ // Initialize the geocoder
+        accessToken: mapboxgl.accessToken, // Set the access token
+        mapboxgl: mapboxgl, // Set the mapbox-gl instance
+        marker: false, // Do not use the default marker style
+    });
+
+    // Add the geocoder to the map
+    map.addControl(geocoder);
+
+    
 </script>
+
 
 {% endblock%}
