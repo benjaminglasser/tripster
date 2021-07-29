@@ -8,9 +8,10 @@ from .models import Trip, Stop, Photo
 from .forms import StopForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import requests
 
 
-#Constants:
+# Constants:
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
 BUCKET = 'tripster-fg'
 
@@ -24,10 +25,12 @@ def about(request):
 
 # trips:
 
+
 @login_required
 def trips_index(request):
     trips = Trip.objects.filter(user=request.user)
     return render(request, 'trips/index.html', {'trips': trips})
+
 
 @login_required
 def trips_detail(request, trip_id):
@@ -35,10 +38,18 @@ def trips_detail(request, trip_id):
     stop_form = StopForm()
     stops = Stop.objects.all()
 
+    ACCESSKEY = 'pk.eyJ1IjoiYmVuZ2xhc3NlciIsImEiOiJja3JvOWJkeG8yODNtMndwZXB5cGYwYTZiIn0.t5K6aF-sboGpQD_xI_tU4w'
+
+    startCoordinates = requests.get(
+        f'https://api.mapbox.com/geocoding/v5/mapbox.places/{trip.start_location}.json?access_token={ACCESSKEY}').json()
+
+    # endCoordinates = f'https://api.mapbox.com/geocoding/v5/mapbox.places/{trip.end_location}.json?access_token={ACCESSKEY}'
+
     return render(request, 'trips/detail.html', {
         'trip': trip,
         'stop_form': stop_form,
-        'stops': stops
+        'stops': stops,
+        'startCoordinates': startCoordinates
     })
 
 
@@ -46,7 +57,6 @@ class TripCreate(LoginRequiredMixin, CreateView):
     model = Trip
     fields = ['name', 'start_date', 'end_date',
               'start_location', 'end_location']
-    
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -65,6 +75,7 @@ class TripDelete(LoginRequiredMixin, DeleteView):
 
 # stops:
 
+
 @login_required
 def stop_create(request, trip_id):
     form = StopForm(request.POST)
@@ -73,6 +84,7 @@ def stop_create(request, trip_id):
         new_stop.trip_id = trip_id
         new_stop.save()
     return redirect('detail', trip_id=trip_id)
+
 
 @login_required
 def stop_detail(request, stop_id):
@@ -99,6 +111,7 @@ class StopDelete(LoginRequiredMixin, DeleteView):
 def logout(request):
     return render(request, 'logout.html')
 
+
 def signup(request):
     error_message = ''
     if request.method == 'POST':
@@ -113,13 +126,16 @@ def signup(request):
     form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form, 'error_message': error_message})
 
-#Photo:
+# Photo:
+
+
 @login_required
 def add_photo(request, stop_id):
-    photo_file= request.FILES.get('photo-file', None)
+    photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
-        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        key = uuid.uuid4().hex[:6] + \
+            photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
