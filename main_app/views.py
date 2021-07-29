@@ -27,7 +27,7 @@ def about(request):
 
 @login_required
 def trips_index(request):
-    trips = Trip.objects.all()
+    trips = Trip.objects.filter(user=request.user)
     return render(request, 'trips/index.html', {'trips': trips})
 
 @login_required
