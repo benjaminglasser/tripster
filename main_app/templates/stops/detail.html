@@ -15,9 +15,9 @@
 
 <hr>
 {% for photo in stop.photo_set.all %}
-<img src="{{photo.url}}" alt="{{stop.name}}" class="responsive-img card-panel">
+    <img src="{{photo.url}}" alt="{{stop.name}}" class="responsive-img card-panel">
 {% empty %}
-<div class="card-panel teal-text center-align">No Photos Uploaded</div>
+    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
 {% endfor %}
 <form class="card-panel" action="{% url 'add_photo' stop.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
