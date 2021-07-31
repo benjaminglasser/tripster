@@ -49,7 +49,7 @@ def trips_detail(request, trip_id):
         'trip': trip,
         'stop_form': stop_form,
         'stops': stops,
-        'startCoordinates': startCoordinates
+        # 'startCoordinates': startCoordinates
     })
 
 
