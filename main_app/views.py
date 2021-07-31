@@ -8,7 +8,6 @@ from .models import Trip, Stop, Photo
 from .forms import StopForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-import requests
 
 
 # Constants:
