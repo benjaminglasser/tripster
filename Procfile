@@ -1,1 +1,1 @@
-web: gunicorn tripster.wsgi
+web: gunicorn Tripster.wsgi
