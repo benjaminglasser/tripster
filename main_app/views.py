@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+
 # Constants:
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
 BUCKET = 'tripster-fg'
@@ -37,10 +38,10 @@ def trips_detail(request, trip_id):
     stop_form = StopForm()
     stops = Stop.objects.all()
 
-    ACCESSKEY = 'pk.eyJ1IjoiYmVuZ2xhc3NlciIsImEiOiJja3JvOWJkeG8yODNtMndwZXB5cGYwYTZiIn0.t5K6aF-sboGpQD_xI_tU4w'
+    # ACCESSKEY = 'pk.eyJ1IjoiYmVuZ2xhc3NlciIsImEiOiJja3JvOWJkeG8yODNtMndwZXB5cGYwYTZiIn0.t5K6aF-sboGpQD_xI_tU4w'
 
-    startCoordinates = requests.get(
-        f'https://api.mapbox.com/geocoding/v5/mapbox.places/{trip.start_location}.json?access_token={ACCESSKEY}').json()
+    # startCoordinates = requests.get(
+    #     f'https://api.mapbox.com/geocoding/v5/mapbox.places/{trip.start_location}.json?access_token={ACCESSKEY}').json()
 
     # endCoordinates = f'https://api.mapbox.com/geocoding/v5/mapbox.places/{trip.end_location}.json?access_token={ACCESSKEY}'
 
